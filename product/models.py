@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils.safestring import mark_safe
 # Create your models here.
 class Category(models.Model):
     STATUS = (
@@ -40,3 +40,18 @@ class Product(models.Model):
     
     def __str__(self):
         return self.title
+    
+    @property
+    def image_tag(self):
+        if self.image:
+            return mark_safe('<img src="{}" width="50" height="50" />'.format(self.image.url))
+        return ""
+
+class Images(models.Model):
+    product=models.ForeignKey(Product,related_name="images", on_delete=models.CASCADE)
+    title = models.CharField(max_length=50,blank=True)
+    image = models.ImageField(blank=True, upload_to='images/')
+
+    def __str__(self):
+        return self.title
+    
