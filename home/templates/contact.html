@@ -1,0 +1,80 @@
+{% extends 'homebase.html' %}
+
+{% block title %} {{setting.title}}{% endblock  %}
+{% block keywords %} {{setting.keywords}} {% endblock %}
+{% block description %} {{setting.description}} {% endblock %}
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block body %} 
+<!-- section -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            
+                <div class="col-md-3">
+                    
+                    <div class="billing-details">
+                        
+                        {% if messages %}
+                        
+                        {% for message in messages %}
+                        <div class="alert alert-{{message.tags}}" role="alert">
+                            {{message}}
+                        </div>
+                            
+                        {% endfor %}
+                        {% endif %}
+                            
+                        <div class="section-title">
+                            <h3 class="title">contact us</h3>
+                            
+                        </div>
+                        <form id="checkout-form" class="clearfix" method="POST">
+                            {% csrf_token %}
+                        
+                        
+                            {{form}}
+                        
+                        
+                            <input class="input" type="submit" value="send" placeholder="Send">
+                        
+                    </form>
+                        
+                        
+						</div>
+                        </div>
+                        <div class="col-md-8">
+                        <div class="shiping-methods">
+							<div class="section-title">
+								<h4 class="title">Contact info</h4>
+							</div>
+							<div>
+								{{ setting.contact | safe}}
+							</div>
+							
+							</div>
+                        </div>
+                    </div>
+                
+                </div>
+
+                
+
+                
+
+                </div>
+            
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /section -->
+
+
+
+     {% endblock %}
+
+    

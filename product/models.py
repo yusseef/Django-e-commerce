@@ -33,7 +33,7 @@ class Product(models.Model):
     price = models.FloatField()
     amount = models.IntegerField(default=0)
     min_amount = models.IntegerField(default=3)
-    detail = RichTextUploadingField()
+    detail = RichTextUploadingField(null=True)
     slug = models.SlugField()
     status = models.CharField(max_length=200, choices=STATUS)
     created_at = models.DateTimeField(auto_now_add=True)
