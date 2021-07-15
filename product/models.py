@@ -2,6 +2,8 @@ from django.db import models
 from django.utils.safestring import mark_safe
 from ckeditor_uploader.fields import RichTextUploadingField
 from mptt.models import MPTTModel, TreeForeignKey
+from django.urls import reverse
+
 # Create your models here.
 class Category(MPTTModel):
     STATUS = (
@@ -14,13 +16,16 @@ class Category(MPTTModel):
     description = models.TextField(max_length=500)
     image = models.ImageField(blank=True, upload_to='images/')
     status = models.CharField(max_length=200, choices=STATUS)
-    slug = models.SlugField()
+    slug = models.SlugField(null= False, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('category_detail', kwargs={'slug': self.slug})
+        
     class MPTTMeta:
         order_insertion_by = ['title']
 
@@ -46,14 +51,16 @@ class Product(models.Model):
     amount = models.IntegerField(default=0)
     min_amount = models.IntegerField(default=3)
     detail = RichTextUploadingField(null=True)
-    slug = models.SlugField()
+    slug = models.SlugField(null=False, unique=True)
     status = models.CharField(max_length=200, choices=STATUS)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
     def __str__(self):
         return self.title
-    
+    def get_absolute_url(self):
+        return reverse('product_details', kwargs= {'slug': self.slug})
+
     @property
     def image_tag(self):
         if self.image:
