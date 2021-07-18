@@ -1,0 +1,82 @@
+{% extends 'homebase.html' %}
+
+{% block title %} {{query}} results{% endblock  %}
+{% block keywords %} {{setting.keywords}} {% endblock %}
+{% block description %} {{setting.description}} {% endblock %}
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block body %} 
+<!-- BREADCRUMB -->
+<div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="/">Home</a></li>
+            <li class="active">{{query}} results</li>
+        </ul>
+    </div>
+</div>
+<!-- /BREADCRUMB -->
+
+	<!-- section -->
+	<div class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+			
+					<div id="store">
+						<!-- row -->
+						<div class="row">
+							
+                                
+                                
+                                    
+                                
+                                    
+							<div class="clearfix visible-sm visible-xs"></div>
+                            {% for product in products  %}
+							<!-- Product Single -->
+							<div class="col-md-4 col-sm-6 col-xs-6">
+								<div class="product product-single">
+									<div class="product-thumb">
+										<a href='/product/{{product.id}}/{{product.slug}}' class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</a>
+										<img src="{{product.image.url}}" alt="">
+									</div>
+									<div class="product-body">
+										<h3 class="product-price">{{product.price}} $ </h3>
+										<div class="product-rating">
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star-o empty"></i>
+										</div>
+										<h2 class="product-name"><a href="#">{{product.title}}</a></h2>
+										<div class="product-btns">
+											<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
+											<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
+											<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+										</div>
+									</div>
+								</div>
+							</div>
+                            {% endfor %}
+							<!-- /Product Single -->
+						</div>
+						<!-- /row -->
+					</div>
+					<!-- /STORE -->
+
+					
+				</div>
+				<!-- /MAIN -->
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /section -->
+
+{% endblock %}
+
+    
